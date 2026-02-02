@@ -1006,28 +1006,92 @@
             <div class="bg-glow bg-glow-red"></div>
             <div class="bg-glow bg-glow-orange"></div>
             <div class="main-content">
-                <div style="margin-bottom: 3vh;">
+                <div style="margin-bottom: 2vh;">
                     <div class="section-tag tag-red"><i class="fa-solid fa-triangle-exclamation"
                             style="margin-right: 0.5em;"></i> The Reality Gap</div>
                     <h1 class="title-text">The Hiring Crisis</h1>
                 </div>
-                <div class="cards-container">
-                    <div class="card">
+                <!-- Stats Row -->
+                <div style="display: flex; gap: 2vw; margin-bottom: 2vh;">
+                    <div
+                        style="flex: 1; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 16px; padding: 2vh 2vw; text-align: center;">
+                        <div
+                            style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; color: #f87171; font-family: 'Space Grotesk', sans-serif;">
+                            $4.7T</div>
+                        <div
+                            style="font-size: clamp(0.7rem, 1vw, 0.9rem); color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em;">
+                            Global Talent Gap</div>
+                    </div>
+                    <div
+                        style="flex: 1; background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); border-radius: 16px; padding: 2vh 2vw; text-align: center;">
+                        <div
+                            style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; color: #fb923c; font-family: 'Space Grotesk', sans-serif;">
+                            75%</div>
+                        <div
+                            style="font-size: clamp(0.7rem, 1vw, 0.9rem); color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em;">
+                            Interview Fail Rate</div>
+                    </div>
+                    <div
+                        style="flex: 1; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 16px; padding: 2vh 2vw; text-align: center;">
+                        <div
+                            style="font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; color: #60a5fa; font-family: 'Space Grotesk', sans-serif;">
+                            42</div>
+                        <div
+                            style="font-size: clamp(0.7rem, 1vw, 0.9rem); color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em;">
+                            Days Avg. Time-to-Hire</div>
+                    </div>
+                </div>
+                <div class="cards-container" style="flex: unset;">
+                    <div class="card" style="padding: 2.5vh 2vw;">
                         <div class="card-label">A</div>
                         <div class="card-icon icon-blue"><i class="fa-solid fa-user-graduate"></i></div>
                         <h3 class="card-title">Silent Practice</h3>
                         <p class="card-desc">Students grind LeetCode in <span class="text-accent-blue">total
-                                silence</span>. They master the algorithms but fail real interviews because they lack
-                            critical <span class="stat-highlight">communication skills</span>.</p>
+                                silence</span>. They master algorithms but fail real interviews due to poor <span
+                                class="stat-highlight">communication skills</span>.</p>
+                        <div
+                            style="margin-top: 1.5vh; padding-top: 1.5vh; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 2vw; flex-wrap: wrap;">
+                            <div
+                                style="display: flex; align-items: center; gap: 0.5vw; font-size: clamp(0.7rem, 1vw, 0.85rem); color: #6b7280;">
+                                <i class="fa-solid fa-times-circle" style="color: #f87171;"></i> No verbal feedback
+                            </div>
+                            <div
+                                style="display: flex; align-items: center; gap: 0.5vw; font-size: clamp(0.7rem, 1vw, 0.85rem); color: #6b7280;">
+                                <i class="fa-solid fa-times-circle" style="color: #f87171;"></i> No soft skill training
+                            </div>
+                        </div>
                     </div>
-                    <div class="card">
+                    <div class="card" style="padding: 2.5vh 2vw;">
                         <div class="card-label">B</div>
                         <div class="card-icon icon-red"><i class="fa-solid fa-robot"></i></div>
                         <h3 class="card-title">Wasted Capital</h3>
                         <p class="card-desc">Companies waste <span class="stat-highlight">$500 per candidate</span> on
-                            screening. Traditional online tests are now obsolete because they are trivially easy to
-                            <span class="text-accent-red">cheat with ChatGPT</span>.</p>
+                            screening. Traditional tests are obsolete—trivially easy to <span
+                                class="text-accent-red">cheat with ChatGPT</span>.</p>
+                        <div
+                            style="margin-top: 1.5vh; padding-top: 1.5vh; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 2vw; flex-wrap: wrap;">
+                            <div
+                                style="display: flex; align-items: center; gap: 0.5vw; font-size: clamp(0.7rem, 1vw, 0.85rem); color: #6b7280;">
+                                <i class="fa-solid fa-times-circle" style="color: #f87171;"></i> 85% cheating with AI
+                            </div>
+                            <div
+                                style="display: flex; align-items: center; gap: 0.5vw; font-size: clamp(0.7rem, 1vw, 0.85rem); color: #6b7280;">
+                                <i class="fa-solid fa-times-circle" style="color: #f87171;"></i> Bad hires cost $17K+
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <!-- Bottom Summary -->
+                <div
+                    style="margin-top: 2vh; background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(251,146,60,0.15)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2vh 3vw; display: flex; align-items: center; justify-content: center; gap: 3vw;">
+                    <div style="text-align: center;">
+                        <i class="fa-solid fa-arrow-trend-down"
+                            style="font-size: clamp(1.2rem, 2vw, 1.5rem); color: #f87171;"></i>
+                        <div style="font-size: clamp(0.8rem, 1.1vw, 1rem); color: #d1d5db;">Both sides lose</div>
+                    </div>
+                    <div style="width: 1px; height: 4vh; background: rgba(255,255,255,0.2);"></div>
+                    <div style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: #fff; font-weight: 500;">The market
+                        needs a <span style="color: #60a5fa;">new paradigm</span> for technical hiring</div>
                 </div>
             </div>
             <div class="footer-status">HireFlow AI // Problem Analysis</div>
