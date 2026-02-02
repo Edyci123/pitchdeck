@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireFlow AI - Cover</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Abstract Background Elements */
+        .bg-glow-blue {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: #2563eb; /* Blue-600 */
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            top: -200px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .bg-glow-purple {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background-color: #7c3aed; /* Violet-600 */
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            bottom: -150px;
+            right: -50px;
+            z-index: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .brand-icon {
+            font-size: 3.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+        }
+
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 7rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 40px rgba(255,255,255,0.1);
+        }
+
+        .tagline-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: #9ca3af; /* Gray-400 */
+            letter-spacing: 0.02em;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        .meta-footer {
+            position: absolute;
+            bottom: 3rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 4rem;
+            box-sizing: border-box;
+            z-index: 20;
+            font-size: 0.85rem;
+            color: #4b5563; /* Gray-600 */
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* SVG Overlay for "Map" feel */
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Ambient Glows -->
+<div class="bg-glow-blue"></div>
+<div class="bg-glow-purple"></div>
+<!-- Tech Grid & Map SVG -->
+<svg class="svg-overlay" height="720" width="1280">
+<defs>
+<pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+<circle cx="1" cy="1" fill="#333" fill-opacity="0.5" r="1"></circle>
+</pattern>
+</defs>
+<!-- Background Grid Points -->
+<rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+<!-- Decorative Connecting Lines (The "Flow") -->
+<path d="M 0 360 C 300 360, 400 200, 640 200 S 980 360, 1280 360" fill="none" stroke="rgba(255,255,255,0.1)" stroke-dasharray="4 4" stroke-width="1.5"></path>
+<path d="M 0 450 C 200 450, 400 550, 640 550 S 1080 450, 1280 450" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"></path>
+</svg>
+<!-- Main Center Content -->
+<div class="main-content">
+<!-- Logo Icon -->
+<div class="brand-icon">
+<i class="fa-brands fa-hubspot"></i>
+</div>
+<!-- Company Name -->
+<h1 class="title-text">
+                HireFlow AI
+            </h1>
+<!-- Tagline -->
+<div class="tagline-text">
+<p>Building the standard for the next generation of hiring</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="meta-footer">
+<p>Investor Presentation 2026</p>
+<p>Confidential &amp; Proprietary</p>
+</div>
+</div>
+</body>
+</html>

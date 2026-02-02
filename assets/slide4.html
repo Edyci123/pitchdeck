@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>HireFlow AI - Technology</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Abstract Background Elements */
+        .bg-glow-cyan {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: #06b6d4;
+            /* Cyan-500 */
+            border-radius: 50%;
+            filter: blur(160px);
+            opacity: 0.08;
+            top: 50%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .bg-glow-purple {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background-color: #7c3aed;
+            /* Violet-600 */
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.08;
+            bottom: -100px;
+            right: 20%;
+            z-index: 0;
+        }
+
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 4rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        .header-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            color: #06b6d4;
+            /* Cyan */
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 4px 16px;
+            border-radius: 20px;
+            background-color: rgba(6, 182, 212, 0.1);
+        }
+
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* Tech Flow Diagram */
+        .diagram-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Nodes */
+        .tech-node {
+            position: absolute;
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            width: 180px;
+        }
+
+        .node-input-voice {
+            top: 12%;
+            left: 3%;
+            border-left: 4px solid #a855f7;
+            /* Purple */
+        }
+
+        .node-input-code {
+            bottom: 12%;
+            left: 3%;
+            border-left: 4px solid #06b6d4;
+            /* Cyan */
+        }
+
+        .node-engine {
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 200px;
+            background-color: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 20;
+            padding: 0;
+            /* Custom inner layout */
+            overflow: visible;
+        }
+
+        .node-output {
+            top: 50%;
+            right: 12%;
+            transform: translateY(-50%);
+            border-left: 4px solid #ef4444;
+            /* Red */
+        }
+
+        /* Node Content Styling */
+        .node-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .icon-purple {
+            color: #a855f7;
+        }
+
+        .icon-cyan {
+            color: #06b6d4;
+        }
+
+        .icon-red {
+            color: #ef4444;
+        }
+
+        .node-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .node-sub {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        /* Engine Internals */
+        .engine-header {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .engine-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .engine-badge {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .engine-viz {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        /* Timeline Visualization */
+        .timeline-track {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .track-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            width: 40px;
+            text-align: right;
+        }
+
+        .track-visual {
+            flex: 1;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            overflow: hidden;
+        }
+
+        /* Fake waveform */
+        .wave-bar {
+            width: 4px;
+            background-color: #a855f7;
+            margin-right: 2px;
+            border-radius: 2px;
+        }
+
+        /* Fake Code blocks */
+        .code-block {
+            height: 12px;
+            width: 12px;
+            background-color: #06b6d4;
+            margin-right: 4px;
+            border-radius: 2px;
+        }
+
+        /* Correlation Line */
+        .scan-line {
+            position: absolute;
+            top: 100px;
+            /* Adjust based on header */
+            left: 145px;
+            /* Position of the "Gap" - aligned with code burst */
+            width: 2px;
+            height: 60px;
+            background-color: #ef4444;
+            z-index: 30;
+            box-shadow: 0 0 10px #ef4444;
+        }
+
+        .scan-alert {
+            position: absolute;
+            top: 165px;
+            left: 145px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            z-index: 35;
+        }
+
+        .description-box {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 54%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            padding: 1.25rem 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .desc-text {
+            color: #d1d5db;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .footer-status {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 4rem;
+            font-size: 0.75rem;
+            color: #4b5563;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Background Glows -->
+        <div class="bg-glow-cyan"></div>
+        <div class="bg-glow-purple"></div>
+        <!-- SVG Overlay for Data Flow Lines -->
+        <svg class="svg-overlay" height="720" width="1280">
+            <defs>
+                <pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+                    <circle cx="1" cy="1" fill="#333" fill-opacity="0.5" r="1"></circle>
+                </pattern>
+                <!-- Gradients for connecting lines -->
+                <lineargradient id="flowVoice" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stop-color="#a855f7" stop-opacity="0.2"></stop>
+                    <stop offset="100%" stop-color="#a855f7" stop-opacity="0.8"></stop>
+                </lineargradient>
+                <lineargradient id="flowCode" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.2"></stop>
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.8"></stop>
+                </lineargradient>
+                <lineargradient id="flowOutput" x1="0%" x2="100%" y1="0%" y2="0%">
+                    <stop offset="0%" stop-color="#ef4444" stop-opacity="0.2"></stop>
+                    <stop offset="100%" stop-color="#ef4444" stop-opacity="0.8"></stop>
+                </lineargradient>
+            </defs>
+            <!-- Grid Background -->
+            <rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+            <!-- Connecting Lines: Inputs to Engine - REMOVED -->
+            <!-- Output Path -->
+            <path d="M 860 360 L 1030 360" fill="none" stroke="url(#flowOutput)" stroke-width="2"></path>
+            <circle cx="1030" cy="360" fill="#ef4444" r="3"></circle>
+        </svg>
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header-section">
+                <div class="section-tag">
+                    <i class="fa-solid fa-layer-group mr-2"></i> The Secret Sauce
+                </div>
+                <h1 class="title-text">Why It's Impossible to Clone</h1>
+            </div>
+            <!-- Central Diagram -->
+            <div class="diagram-container">
+                <!-- Input Node 1: Voice -->
+                <div class="tech-node node-input-voice">
+                    <div class="node-icon icon-purple"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <div class="node-label">Audio Stream</div>
+                    <div class="node-sub">Real-time transcripts</div>
+                </div>
+                <!-- Input Node 2: Keystrokes -->
+                <div class="tech-node node-input-code">
+                    <div class="node-icon icon-cyan"><i class="fa-regular fa-keyboard"></i></div>
+                    <div class="node-label">Keystroke Stream</div>
+                    <div class="node-sub">Event timestamps</div>
+                </div>
+                <!-- Central Engine -->
+                <div class="node-engine">
+                    <div class="engine-header">
+                        <span class="engine-title">Correlation Engine</span>
+                        <span class="engine-badge">ACTIVE</span>
+                    </div>
+                    <div class="engine-viz">
+                        <!-- Audio Track -->
+                        <div class="timeline-track">
+                            <div class="track-label"><i class="fa-solid fa-wave-square"></i></div>
+                            <div class="track-visual">
+                                <!-- Simulated Waveform -->
+                                <div class="wave-bar" style="height: 10px;"></div>
+                                <div class="wave-bar" style="height: 16px;"></div>
+                                <div class="wave-bar" style="height: 12px;"></div>
+                                <div class="wave-bar" style="height: 8px;"></div>
+                                <!-- GAP -->
+                                <div style="width: 40px;"></div>
+                                <!-- Resume -->
+                                <div class="wave-bar" style="height: 14px;"></div>
+                                <div class="wave-bar" style="height: 18px;"></div>
+                                <div class="wave-bar" style="height: 10px;"></div>
+                            </div>
+                        </div>
+                        <!-- Code Track -->
+                        <div class="timeline-track">
+                            <div class="track-label"><i class="fa-solid fa-code"></i></div>
+                            <div class="track-visual">
+                                <!-- Simulated Typing -->
+                                <div class="code-block" style="width: 20px;"></div>
+                                <div class="code-block" style="width: 15px;"></div>
+                                <!-- SUSPICIOUS CODE BURST DURING SILENCE -->
+                                <div class="code-block"
+                                    style="width: 50px; background-color: #ef4444; opacity: 0.8; margin-left: 20px;">
+                                </div>
+                                <div class="code-block" style="width: 10px; margin-left: 5px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The "Scanner" detecting the mismatch -->
+                    <div class="scan-line"></div>
+                    <div class="scan-alert">LOGIC GAP DETECTED</div>
+                </div>
+                <!-- Output Node -->
+                <div class="tech-node node-output">
+                    <div class="node-icon icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="node-label">Suspicious Activity</div>
+                    <div class="node-sub">Code written without explanation</div>
+                </div>
+            </div>
+            <!-- Explanation Text -->
+            <div class="description-box">
+                <p class="desc-text">
+                    We link <span class="highlight">keystroke timestamps</span> with audio transcripts to detect logic
+                    gaps.
+                    <br />If you write code without explaining it, the AI flags it.
+                </p>
+            </div>
+            <div class="footer-status">
+                HireFlow AI // Event-Driven Core
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>HireFlow AI - Full Presentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background glows */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-glow-blue {
+            width: 50vw;
+            height: 50vw;
+            background: #2563eb;
+            filter: blur(120px);
+            opacity: 0.15;
+            top: -20%;
+            left: -10%;
+        }
+
+        .bg-glow-purple {
+            width: 40vw;
+            height: 40vw;
+            background: #7c3aed;
+            filter: blur(100px);
+            opacity: 0.12;
+            bottom: -15%;
+            right: -5%;
+        }
+
+        .bg-glow-red {
+            width: 40vw;
+            height: 40vw;
+            background: #ef4444;
+            filter: blur(140px);
+            opacity: 0.08;
+            top: -10%;
+            left: -10%;
+        }
+
+        .bg-glow-orange {
+            width: 40vw;
+            height: 40vw;
+            background: #f97316;
+            filter: blur(140px);
+            opacity: 0.08;
+            bottom: -10%;
+            right: -10%;
+        }
+
+        .bg-glow-center {
+            width: 50vw;
+            height: 50vw;
+            background: #3b82f6;
+            filter: blur(150px);
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bg-glow-corner {
+            width: 35vw;
+            height: 35vw;
+            background: #8b5cf6;
+            filter: blur(120px);
+            opacity: 0.08;
+            top: -10%;
+            right: -10%;
+        }
+
+        .bg-glow-cyan {
+            width: 50vw;
+            height: 50vw;
+            background: #06b6d4;
+            filter: blur(160px);
+            opacity: 0.08;
+            top: 50%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bg-glow-green {
+            width: 50vw;
+            height: 50vw;
+            background: #10b981;
+            filter: blur(160px);
+            opacity: 0.08;
+            bottom: -10%;
+            right: 0;
+        }
+
+        .bg-glow-main {
+            width: 60vw;
+            height: 60vw;
+            background: #4f46e5;
+            filter: blur(180px);
+            opacity: 0.15;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .svg-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 4vh 5vw;
+            z-index: 10;
+            position: relative;
+        }
+
+        .main-content.center {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Typography */
+        .section-tag {
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            padding: 0.4em 1em;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1vh;
+        }
+
+        .tag-red {
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .tag-blue {
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .tag-cyan {
+            color: #06b6d4;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .tag-green {
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .tag-indigo {
+            color: #818cf8;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 1vh;
+        }
+
+        .title-huge {
+            font-size: clamp(3rem, 8vw, 7rem);
+            margin-bottom: 2vh;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2vw, 1.75rem);
+            font-weight: 300;
+            color: #9ca3af;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        .brand-icon {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #fff;
+            margin-bottom: 2vh;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+        }
+
+        /* Cards */
+        .cards-container {
+            display: flex;
+            gap: 2vw;
+            flex: 1;
+        }
+
+        .card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3vh 2vw;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card-icon {
+            width: clamp(48px, 5vw, 64px);
+            height: clamp(48px, 5vw, 64px);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.2rem, 2vw, 1.75rem);
+            margin-bottom: 2vh;
+        }
+
+        .icon-blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .icon-red {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .icon-purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .icon-teal {
+            background: rgba(20, 184, 166, 0.15);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+
+        .icon-green {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .card-label {
+            position: absolute;
+            top: 2vh;
+            right: 2vw;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            opacity: 0.1;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.75rem);
+            font-weight: 600;
+            margin-bottom: 1vh;
+        }
+
+        .card-desc {
+            font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+            line-height: 1.6;
+            color: #d1d5db;
+            font-weight: 300;
+        }
+
+        .stat-highlight {
+            font-weight: 600;
+            color: #fff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .text-accent-blue {
+            color: #93c5fd;
+        }
+
+        .text-accent-red {
+            color: #fca5a5;
+        }
+
+        /* Slide 3 - Triad Layout */
+        .features-container {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .core-visual {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(180px, 15vw);
+            height: min(180px, 15vw);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .core-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), rgba(0, 0, 0, 0.8));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .core-icon {
+            font-size: clamp(2rem, 4vw, 4rem);
+            color: #fff;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+        }
+
+        .feature-card {
+            position: absolute;
+            width: clamp(200px, 25vw, 320px);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2vh 1.5vw;
+            display: flex;
+            flex-direction: column;
+            gap: 1vh;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-left {
+            top: 45%;
+            left: 3%;
+            transform: translateY(-50%);
+        }
+
+        .card-right {
+            top: 45%;
+            right: 3%;
+            transform: translateY(-50%);
+        }
+
+        .card-bottom {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: clamp(240px, 30vw, 380px);
+        }
+
+        /* Slide 4 - Tech Diagram */
+        .diagram-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tech-node {
+            position: absolute;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2vh 1.5vw;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5vh;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            width: clamp(140px, 15vw, 180px);
+        }
+
+        .node-input-voice {
+            top: 12%;
+            left: 3%;
+            border-left: 4px solid #a855f7;
+        }
+
+        .node-input-code {
+            bottom: 12%;
+            left: 3%;
+            border-left: 4px solid #06b6d4;
+        }
+
+        .node-output {
+            top: 50%;
+            right: 8%;
+            transform: translateY(-50%);
+            border-left: 4px solid #ef4444;
+        }
+
+        .node-engine {
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            width: clamp(240px, 26vw, 320px);
+            height: auto;
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 20;
+            padding: 0;
+            overflow: visible;
+        }
+
+        .node-icon {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            margin-bottom: 0.5vh;
+        }
+
+        .icon-purple-text {
+            color: #a855f7;
+        }
+
+        .icon-cyan-text {
+            color: #06b6d4;
+        }
+
+        .icon-red-text {
+            color: #ef4444;
+        }
+
+        .node-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .node-sub {
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            color: #9ca3af;
+        }
+
+        .engine-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5vh 1vw;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .engine-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.7rem, 1vw, 0.9rem);
+            font-weight: 600;
+            color: #e5e7eb;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .engine-badge {
+            font-size: clamp(0.6rem, 0.8vw, 0.7rem);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .engine-viz {
+            padding: 2vh 1vw;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5vh;
+            position: relative;
+        }
+
+        .timeline-track {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+        }
+
+        .track-label {
+            font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+            color: #6b7280;
+            width: 30px;
+            text-align: right;
+        }
+
+        .track-visual {
+            flex: 1;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            overflow: hidden;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: #a855f7;
+            margin-right: 2px;
+            border-radius: 2px;
+        }
+
+        .code-block {
+            height: 12px;
+            background: #06b6d4;
+            margin-right: 4px;
+            border-radius: 2px;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: #ef4444;
+            z-index: 30;
+            box-shadow: 0 0 10px #ef4444;
+            transform: translate(-50%, -50%);
+        }
+
+        .scan-alert {
+            position: absolute;
+            top: calc(50% + 25px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ef4444;
+            color: #fff;
+            font-size: clamp(0.5rem, 0.8vw, 0.7rem);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            z-index: 35;
+            white-space: nowrap;
+        }
+
+        .description-box {
+            position: absolute;
+            bottom: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            padding: 2vh 2vw;
+            border-radius: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .desc-text {
+            color: #d1d5db;
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Slide 5 - Strategy */
+        .strategy-container {
+            display: flex;
+            gap: 2vw;
+            flex: 1;
+            margin-bottom: 2vh;
+            position: relative;
+            align-items: center;
+        }
+
+        .phase-card {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3vh 2vw;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(10px);
+            height: auto;
+            min-height: 35vh;
+        }
+
+        .phase-badge {
+            position: absolute;
+            top: 2vh;
+            right: 2vw;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .badge-b2c {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-b2b {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .phase-icon {
+            width: clamp(48px, 5vw, 60px);
+            height: clamp(48px, 5vw, 60px);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.2rem, 2vw, 1.75rem);
+            margin-bottom: 2vh;
+        }
+
+        .phase-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.75rem);
+            font-weight: 700;
+            margin-bottom: 0.5vh;
+        }
+
+        .phase-subtitle {
+            font-size: clamp(0.7rem, 1vw, 0.9rem);
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1vh;
+        }
+
+        .phase-desc {
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        .highlight-blue {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .highlight-green {
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .strategy-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            gap: 0.5vh;
+        }
+
+        .connector-line {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .connector-line::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -3px;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+        }
+
+        .connector-label {
+            font-size: clamp(0.5rem, 0.8vw, 0.7rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6b7280;
+            background: #000;
+            padding: 0 8px;
+            z-index: 2;
+        }
+
+        .traction-box {
+            background: linear-gradient(90deg, rgba(20, 20, 20, 0.8), rgba(30, 30, 30, 0.8));
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 2vh 2vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .traction-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            font-weight: 600;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5vh;
+        }
+
+        .traction-stat {
+            font-size: clamp(0.9rem, 1.3vw, 1.25rem);
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .stat-number {
+            font-weight: 700;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            margin-right: 0.5vw;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: clamp(0.6rem, 0.9vw, 0.8rem);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Slide 6 - Closing */
+        .goal-container {
+            max-width: 80vw;
+            margin-bottom: 5vh;
+            position: relative;
+            padding: 3vh;
+        }
+
+        .goal-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin: 0;
+        }
+
+        .highlight-text {
+            color: #818cf8;
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(79, 70, 229, 0.4);
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        .brand-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1vh;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 3vh;
+            width: min(600px, 60vw);
+        }
+
+        .brand-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+            margin-bottom: 0.5vh;
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .contact-info {
+            position: absolute;
+            bottom: 3vh;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            color: #4b5563;
+            letter-spacing: 0.05em;
+            display: flex;
+            gap: 2vw;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5vw;
+        }
+
+        .corner-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 5;
+        }
+
+        .bracket-tl {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .bracket-tr {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .bracket-bl {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .bracket-br {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Footer */
+        .footer-status {
+            position: absolute;
+            bottom: 2vh;
+            right: 3vw;
+            font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+            color: #4b5563;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .meta-footer {
+            position: absolute;
+            bottom: 3vh;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5vw;
+            box-sizing: border-box;
+            z-index: 20;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            color: #4b5563;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 2vh;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1vw;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 1vh 2vw;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.8rem, 1vw, 1rem);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 2vh;
+            right: 3vw;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.8rem, 1vw, 1rem);
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="currentSlide">1</span> / 6</div>
+
+        <!-- SLIDE 1: Cover -->
+        <div class="slide active" id="slide1">
+            <div class="bg-glow bg-glow-blue"></div>
+            <div class="bg-glow bg-glow-purple"></div>
+            <div class="main-content center">
+                <div class="brand-icon"><i class="fa-brands fa-hubspot"></i></div>
+                <h1 class="title-text title-huge">HireFlow AI</h1>
+                <div class="tagline">
+                    <p>Building the standard for the next generation of hiring</p>
+                </div>
+            </div>
+            <div class="meta-footer">
+                <p>Investor Presentation 2026</p>
+                <p>Confidential &amp; Proprietary</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: The Hiring Crisis -->
+        <div class="slide" id="slide2">
+            <div class="bg-glow bg-glow-red"></div>
+            <div class="bg-glow bg-glow-orange"></div>
+            <div class="main-content">
+                <div style="margin-bottom: 3vh;">
+                    <div class="section-tag tag-red"><i class="fa-solid fa-triangle-exclamation"
+                            style="margin-right: 0.5em;"></i> The Reality Gap</div>
+                    <h1 class="title-text">The Hiring Crisis</h1>
+                </div>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-label">A</div>
+                        <div class="card-icon icon-blue"><i class="fa-solid fa-user-graduate"></i></div>
+                        <h3 class="card-title">Silent Practice</h3>
+                        <p class="card-desc">Students grind LeetCode in <span class="text-accent-blue">total
+                                silence</span>. They master the algorithms but fail real interviews because they lack
+                            critical <span class="stat-highlight">communication skills</span>.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">B</div>
+                        <div class="card-icon icon-red"><i class="fa-solid fa-robot"></i></div>
+                        <h3 class="card-title">Wasted Capital</h3>
+                        <p class="card-desc">Companies waste <span class="stat-highlight">$500 per candidate</span> on
+                            screening. Traditional online tests are now obsolete because they are trivially easy to
+                            <span class="text-accent-red">cheat with ChatGPT</span>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-status">HireFlow AI // Problem Analysis</div>
+        </div>
+
+        <!-- SLIDE 3: The Career Gym -->
+        <div class="slide" id="slide3">
+            <div class="bg-glow bg-glow-center"></div>
+            <div class="bg-glow bg-glow-corner"></div>
+            <div class="main-content">
+                <div style="text-align: center; margin-bottom: 2vh;">
+                    <div class="section-tag tag-blue"><i class="fa-solid fa-microchip" style="margin-right: 0.5em;"></i>
+                        The Solution</div>
+                    <h1 class="title-text">The Career Gym</h1>
+                </div>
+                <div class="features-container">
+                    <div class="feature-card card-left">
+                        <div class="card-icon icon-blue"><i class="fa-solid fa-microphone-lines"></i></div>
+                        <h3 class="card-title">Voice-First</h3>
+                        <p class="card-desc">Interacts, interrupts, and challenges candidates <span
+                                class="highlight">like a human</span>. No more silent typing; it's a conversation.</p>
+                    </div>
+                    <div class="core-visual">
+                        <div class="core-circle"><i class="fa-solid fa-brain core-icon"></i></div>
+                    </div>
+                    <div class="feature-card card-right">
+                        <div class="card-icon icon-purple"><i class="fa-regular fa-eye"></i></div>
+                        <h3 class="card-title">Visual Intelligence</h3>
+                        <p class="card-desc">It sees what you draw. The AI critiques <span class="highlight">system
+                                design</span> whiteboard diagrams in real-time.</p>
+                    </div>
+                    <div class="feature-card card-bottom">
+                        <div class="card-icon icon-teal"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="card-title">Cheat-Proof</h3>
+                        <p class="card-desc">Analyzes the <span class="highlight">explanation</span>, not just the code.
+                            If you can't explain why your code works, you don't pass.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-status">HireFlow AI // Multimodal Simulator</div>
+        </div>
+
+        <!-- SLIDE 4: Technology -->
+        <div class="slide" id="slide4">
+            <div class="bg-glow bg-glow-cyan"></div>
+            <div class="bg-glow bg-glow-purple"></div>
+            <div class="main-content">
+                <div style="margin-bottom: 3vh;">
+                    <div class="section-tag tag-cyan"><i class="fa-solid fa-layer-group"
+                            style="margin-right: 0.5em;"></i> The Secret Sauce</div>
+                    <h1 class="title-text">Why It's Impossible to Clone</h1>
+                </div>
+                <div class="diagram-container">
+                    <div class="tech-node node-input-voice">
+                        <div class="node-icon icon-purple-text"><i class="fa-solid fa-microphone-lines"></i></div>
+                        <div class="node-label">Audio Stream</div>
+                        <div class="node-sub">Real-time transcripts</div>
+                    </div>
+                    <div class="tech-node node-input-code">
+                        <div class="node-icon icon-cyan-text"><i class="fa-regular fa-keyboard"></i></div>
+                        <div class="node-label">Keystroke Stream</div>
+                        <div class="node-sub">Event timestamps</div>
+                    </div>
+                    <div class="tech-node node-engine">
+                        <div class="engine-header">
+                            <span class="engine-title">Correlation Engine</span>
+                            <span class="engine-badge">ACTIVE</span>
+                        </div>
+                        <div class="engine-viz">
+                            <div class="timeline-track">
+                                <div class="track-label"><i class="fa-solid fa-wave-square"></i></div>
+                                <div class="track-visual">
+                                    <div class="wave-bar" style="height: 10px;"></div>
+                                    <div class="wave-bar" style="height: 16px;"></div>
+                                    <div class="wave-bar" style="height: 12px;"></div>
+                                    <div class="wave-bar" style="height: 8px;"></div>
+                                    <div style="width: 40px;"></div>
+                                    <div class="wave-bar" style="height: 14px;"></div>
+                                    <div class="wave-bar" style="height: 18px;"></div>
+                                    <div class="wave-bar" style="height: 10px;"></div>
+                                </div>
+                            </div>
+                            <div class="timeline-track">
+                                <div class="track-label"><i class="fa-solid fa-code"></i></div>
+                                <div class="track-visual">
+                                    <div class="code-block" style="width: 20px;"></div>
+                                    <div class="code-block" style="width: 15px;"></div>
+                                    <div class="code-block"
+                                        style="width: 50px; background-color: #ef4444; opacity: 0.8; margin-left: 20px;">
+                                    </div>
+                                    <div class="code-block" style="width: 10px; margin-left: 5px;"></div>
+                                </div>
+                            </div>
+                            <div class="scan-line"></div>
+                            <div class="scan-alert">LOGIC GAP DETECTED</div>
+                        </div>
+                    </div>
+                    <div class="tech-node node-output">
+                        <div class="node-icon icon-red-text"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="node-label">Suspicious Activity</div>
+                        <div class="node-sub">Code written without explanation</div>
+                    </div>
+                </div>
+                <div class="description-box">
+                    <p class="desc-text">We link <span class="highlight">keystroke timestamps</span> with audio
+                        transcripts to detect logic gaps.<br />If you write code without explaining it, the AI flags it.
+                    </p>
+                </div>
+            </div>
+            <div class="footer-status">HireFlow AI // Event-Driven Core</div>
+        </div>
+
+        <!-- SLIDE 5: Business Strategy -->
+        <div class="slide" id="slide5">
+            <div class="bg-glow bg-glow-blue"></div>
+            <div class="bg-glow bg-glow-green"></div>
+            <div class="main-content">
+                <div style="margin-bottom: 2vh;">
+                    <div class="section-tag tag-green"><i class="fa-solid fa-chart-line"
+                            style="margin-right: 0.5em;"></i> Business Model</div>
+                    <h1 class="title-text">The Tesla Strategy</h1>
+                </div>
+                <div class="strategy-container">
+                    <div class="phase-card">
+                        <div class="phase-badge badge-b2c">Phase 1</div>
+                        <div class="phase-icon icon-blue"><i class="fa-solid fa-dumbbell"></i></div>
+                        <h3 class="phase-title">The Gym</h3>
+                        <div class="phase-subtitle">Data Acquisition</div>
+                        <p class="phase-desc">A freemium app for students to practice. We provide value for free to
+                            gather <span class="highlight-blue">massive training data</span> on how candidates speak and
+                            code.</p>
+                    </div>
+                    <div class="strategy-connector">
+                        <div class="connector-label">Data Flywheel</div>
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="phase-card">
+                        <div class="phase-badge badge-b2b">Phase 2</div>
+                        <div class="phase-icon icon-green"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3 class="phase-title">The Gatekeeper</h3>
+                        <div class="phase-subtitle">Monetization</div>
+                        <p class="phase-desc">Selling automated AI screening to enterprises.<br /><span
+                                class="highlight-green">$15 per candidate</span>.<br />Faster, cheaper, and cheat-proof.
+                        </p>
+                    </div>
+                </div>
+                <div class="traction-box">
+                    <div>
+                        <div class="traction-label">Current Traction</div>
+                        <div class="traction-stat"><span class="stat-number">30+</span> Power Users from Ivy League
+                            &amp; Top European Universities</div>
+                    </div>
+                    <div class="verified-badge"><i class="fa-solid fa-check-circle"
+                            style="margin-right: 0.5em; color: #34d399;"></i> Feeding Verified 2026 Questions</div>
+                </div>
+            </div>
+            <div class="footer-status">HireFlow AI // Go-To-Market</div>
+        </div>
+
+        <!-- SLIDE 6: Closing -->
+        <div class="slide" id="slide6">
+            <div class="bg-glow bg-glow-main"></div>
+            <div class="main-content center">
+                <div class="section-tag tag-indigo"><i class="fa-solid fa-crosshairs" style="margin-right: 0.5em;"></i>
+                    Why We Are Here</div>
+                <div class="goal-container">
+                    <div class="corner-bracket bracket-tl"></div>
+                    <div class="corner-bracket bracket-tr"></div>
+                    <div class="corner-bracket bracket-bl"></div>
+                    <div class="corner-bracket bracket-br"></div>
+                    <h1 class="goal-text">To validate our B2B pivot<br />and solve <span class="highlight-text">AI
+                            hiring compliance</span>.</h1>
+                </div>
+                <div class="brand-section">
+                    <div class="brand-logo-row">
+                        <i class="fa-brands fa-hubspot brand-icon" style="font-size: 2rem;"></i>
+                        <div class="brand-name">HireFlow AI</div>
+                    </div>
+                    <p class="tagline" style="font-size: 1rem;">Building the standard for the next generation of hiring.
+                    </p>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i> investors@hireflow.ai</div>
+                    <div class="contact-item"><i class="fa-solid fa-globe"></i> hireflow.ai</div>
+                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i> San Francisco, CA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+            <button class="nav-btn" onclick="nextSlide()">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function showSlide(n) {
+            if (n < 1) n = totalSlides;
+            if (n > totalSlides) n = 1;
+            currentSlide = n;
+
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+            document.getElementById('currentSlide').textContent = n;
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+
+</html>

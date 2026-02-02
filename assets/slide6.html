@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireFlow AI - Why We Are Here</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Ambient Glows - Dramatic Central Focus */
+        .bg-glow-main {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background-color: #4f46e5; /* Indigo-600 */
+            border-radius: 50%;
+            filter: blur(180px);
+            opacity: 0.15;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .bg-glow-accent {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: #2563eb; /* Blue-600 */
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            z-index: 10;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Top Label */
+        .header-label {
+            font-size: 0.9rem;
+            color: #818cf8; /* Indigo-400 */
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            background: rgba(79, 70, 229, 0.1);
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            display: inline-block;
+        }
+
+        /* Main Goal Typography */
+        .goal-container {
+            max-width: 900px;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .goal-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .highlight-text {
+            color: #818cf8; /* Indigo Accent */
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Underline effect for highlight */
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(79, 70, 229, 0.4);
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        /* Brand Footer */
+        .brand-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 2.5rem;
+            width: 600px;
+        }
+
+        .brand-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-icon {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #9ca3af; /* Gray-400 */
+            letter-spacing: 0.02em;
+        }
+
+        /* Contact/Footer Info */
+        .contact-info {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 0.85rem;
+            color: #4b5563;
+            letter-spacing: 0.05em;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Target Reticle Animation Components */
+        .reticle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            z-index: 5;
+        }
+        
+        .corner-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 5;
+        }
+        
+        .bracket-tl { top: -20px; left: -20px; border-right: none; border-bottom: none; }
+        .bracket-tr { top: -20px; right: -20px; border-left: none; border-bottom: none; }
+        .bracket-bl { bottom: -20px; left: -20px; border-right: none; border-top: none; }
+        .bracket-br { bottom: -20px; right: -20px; border-left: none; border-top: none; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Ambient Background Glows -->
+<div class="bg-glow-main"></div>
+<div class="bg-glow-accent"></div>
+<!-- Technical Map Overlay -->
+<svg class="svg-overlay" height="720" width="1280">
+<defs>
+<pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+<circle cx="1" cy="1" fill="#333" fill-opacity="0.5" r="1"></circle>
+</pattern>
+<!-- Radial Gradient for central rings -->
+<radialgradient cx="50%" cy="50%" fx="50%" fy="50%" id="ringGradient" r="50%">
+<stop offset="0%" stop-color="#4f46e5" stop-opacity="0"></stop>
+<stop offset="90%" stop-color="#4f46e5" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#4f46e5" stop-opacity="0.3"></stop>
+</radialgradient>
+</defs>
+<!-- Grid -->
+<rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+<!-- Central Radar/Target Rings -->
+<circle cx="640" cy="360" fill="none" r="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"></circle>
+<circle cx="640" cy="360" fill="none" r="280" stroke="rgba(255,255,255,0.03)" stroke-dasharray="8 8" stroke-width="1"></circle>
+<circle cx="640" cy="360" fill="none" r="380" stroke="url(#ringGradient)" stroke-width="2"></circle>
+<!-- Converging Lines -->
+<line stroke="rgba(255,255,255,0.1)" stroke-width="1" x1="100" x2="400" y1="360" y2="360"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="1" x1="880" x2="1180" y1="360" y2="360"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="1" x1="640" x2="640" y1="100" y2="200"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-width="1" x1="640" x2="640" y1="520" y2="620"></line>
+<!-- Decorative Map Markers -->
+<path d="M 640 340 L 640 380 M 620 360 L 660 360" stroke="#818cf8" stroke-opacity="0.5" stroke-width="1"></path>
+</svg>
+<div class="main-content">
+<!-- Top Tag -->
+<div class="header-label">
+<i class="fa-solid fa-crosshairs mr-2"></i> Why We Are Here
+            </div>
+<!-- The Big Ask / Goal -->
+<div class="goal-container">
+<!-- Decorative Brackets around text -->
+<div class="corner-bracket bracket-tl"></div>
+<div class="corner-bracket bracket-tr"></div>
+<div class="corner-bracket bracket-bl"></div>
+<div class="corner-bracket bracket-br"></div>
+<h1 class="goal-text">
+                    To validate our B2B pivot <br/>
+                    and solve <span class="highlight-text">AI hiring compliance</span>.
+                </h1>
+</div>
+<!-- Brand & Closing -->
+<div class="brand-section">
+<div class="brand-logo-row">
+<i class="fa-brands fa-hubspot brand-icon"></i>
+<div class="brand-name">HireFlow AI</div>
+</div>
+<p class="tagline">
+                    Building the standard for the next generation of hiring.
+                </p>
+</div>
+<!-- Footer Info -->
+<div class="contact-info">
+<div class="contact-item">
+<i class="fa-solid fa-envelope text-gray-500"></i> investors@hireflow.ai
+                </div>
+<div class="contact-item">
+<i class="fa-solid fa-globe text-gray-500"></i> hireflow.ai
+                </div>
+<div class="contact-item">
+<i class="fa-solid fa-location-dot text-gray-500"></i> San Francisco, CA
+                </div>
+</div>
+</div>
+</div>
+</body>
+</html>

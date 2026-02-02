@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireFlow AI - The Hiring Crisis</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Abstract Background Elements - Consistent with Cover */
+        /* Using solid colors with blur instead of gradients */
+        .bg-glow-red {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background-color: #ef4444; /* Red-500 */
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.08;
+            top: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .bg-glow-orange {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background-color: #f97316; /* Orange-500 */
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.08;
+            bottom: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 4rem 6rem;
+            z-index: 10;
+        }
+
+        .header-section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            color: #ef4444; /* Red for crisis/alert */
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+            height: 100%;
+        }
+
+        .problem-card {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        /* Card Header with Icon */
+        .card-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-wrapper-a {
+            background-color: rgba(59, 130, 246, 0.1); /* Blue tint */
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .icon-wrapper-b {
+            background-color: rgba(239, 68, 68, 0.1); /* Red tint */
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .card-label {
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .card-description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #d1d5db; /* Gray-300 */
+            font-weight: 300;
+        }
+
+        .stat-highlight {
+            font-weight: 600;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Specific accent colors for text highlights */
+        .text-accent-a { color: #93c5fd; }
+        .text-accent-b { color: #fca5a5; }
+
+        .footer-status {
+            position: absolute;
+            bottom: 2rem;
+            left: 6rem;
+            font-size: 0.75rem;
+            color: #4b5563;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Ambient Glows (Red/Orange for Problem/Crisis theme) -->
+<div class="bg-glow-red"></div>
+<div class="bg-glow-orange"></div>
+<!-- Tech Grid & Map SVG -->
+<svg class="svg-overlay" height="720" width="1280">
+<defs>
+<pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+<circle cx="1" cy="1" fill="#333" fill-opacity="0.5" r="1"></circle>
+</pattern>
+</defs>
+<!-- Background Grid -->
+<rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+<!-- Connection Line between A and B (The Gap) -->
+<line stroke="rgba(255,255,255,0.1)" stroke-dasharray="4 4" stroke-width="1" x1="640" x2="640" y1="280" y2="580"></line>
+<!-- Map markers on corners of content area -->
+<path d="M 100 100 L 120 100 M 100 100 L 100 120" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"></path>
+<path d="M 1180 100 L 1160 100 M 1180 100 L 1180 120" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"></path>
+<path d="M 100 620 L 120 620 M 100 620 L 100 600" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"></path>
+<path d="M 1180 620 L 1160 620 M 1180 620 L 1180 600" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"></path>
+</svg>
+<div class="main-content">
+<!-- Header -->
+<div class="header-section">
+<div class="section-tag">
+<i class="fa-solid fa-triangle-exclamation mr-2"></i> The Reality Gap
+                </div>
+<h1 class="title-text">The Hiring Crisis</h1>
+</div>
+<!-- Two Column Layout -->
+<div class="cards-container">
+<!-- Point A: Students -->
+<div class="problem-card">
+<div class="card-label">A</div>
+<div class="card-icon-wrapper icon-wrapper-a">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+<h3 class="card-title">Silent Practice</h3>
+<p class="card-description">
+                        Students grind LeetCode in <span class="text-accent-a">total silence</span>. They master the algorithms but fail real interviews because they lack critical <span class="stat-highlight">communication skills</span>.
+                    </p>
+</div>
+<!-- Point B: Companies -->
+<div class="problem-card">
+<div class="card-label">B</div>
+<div class="card-icon-wrapper icon-wrapper-b">
+<i class="fa-solid fa-robot"></i>
+</div>
+<h3 class="card-title">Wasted Capital</h3>
+<p class="card-description">
+                        Companies waste <span class="stat-highlight">$500 per candidate</span> on screening. Traditional online tests are now obsolete because they are trivially easy to <span class="text-accent-b">cheat with ChatGPT</span>.
+                    </p>
+</div>
+</div>
+</div>
+<div class="footer-status">
+            HireFlow AI // Problem Analysis
+        </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HireFlow AI - The Career Gym</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Ambient Glows */
+        .bg-glow-center {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: #3b82f6; /* Blue-500 */
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .bg-glow-corner {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: #8b5cf6; /* Violet-500 */
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 4rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        .header-section {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            color: #3b82f6; /* Blue */
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 4px 16px;
+            border-radius: 20px;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* Triad Layout */
+        .features-container {
+            position: relative;
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Central Core Visual */
+        .core-visual {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .core-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.2), rgba(0, 0, 0, 0.8));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+            position: relative;
+        }
+        
+        /* Simulated ripple rings */
+        .core-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .ring-1 { width: 220px; height: 220px; }
+        .ring-2 { width: 280px; height: 280px; opacity: 0.5; }
+
+        .core-icon {
+            font-size: 4rem;
+            color: #ffffff;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            position: absolute;
+            width: 320px;
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .card-left {
+            top: 45%;
+            left: 5%;
+            transform: translateY(-50%);
+        }
+
+        .card-right {
+            top: 45%;
+            right: 5%;
+            transform: translateY(-50%);
+        }
+
+        .card-bottom {
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px; /* Slightly wider */
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-voice { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .icon-visual { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .icon-security { background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.3); }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #9ca3af; /* Gray-400 */
+            margin: 0;
+        }
+
+        .highlight-text {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .footer-status {
+            position: absolute;
+            bottom: 2rem;
+            right: 4rem;
+            font-size: 0.75rem;
+            color: #4b5563;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Glows -->
+<div class="bg-glow-center"></div>
+<div class="bg-glow-corner"></div>
+<!-- SVG Overlay for Connecting Lines -->
+<svg class="svg-overlay" height="720" width="1280">
+<defs>
+<pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+<circle cx="1" cy="1" fill="#333" fill-opacity="0.5" r="1"></circle>
+</pattern>
+<!-- Gradients for lines -->
+<lineargradient id="gradLeft" x1="50%" x2="0%" y1="50%" y2="50%">
+<stop offset="0%" stop-color="#3b82f6" stop-opacity="0"></stop>
+<stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"></stop>
+</lineargradient>
+<lineargradient id="gradRight" x1="50%" x2="100%" y1="50%" y2="50%">
+<stop offset="0%" stop-color="#a855f7" stop-opacity="0"></stop>
+<stop offset="100%" stop-color="#a855f7" stop-opacity="0.6"></stop>
+</lineargradient>
+<lineargradient id="gradBottom" x1="50%" x2="50%" y1="45%" y2="100%">
+<stop offset="0%" stop-color="#14b8a6" stop-opacity="0"></stop>
+<stop offset="100%" stop-color="#14b8a6" stop-opacity="0.6"></stop>
+</lineargradient>
+</defs>
+<!-- Grid -->
+<rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+<!-- Connecting Lines -->
+<!-- Center is approx 640, 350 relative to full page, but content area is offset. 
+             Based on layout: Center Visual is at 45% height -> y=324. 
+             Left card is at left 5% (approx x=64 + 160 = 224), center y=324.
+             Right card is at right 5% (approx x=1216 - 160 = 1056), center y=324.
+             Bottom card is at bottom 2% (approx y=650), center x=640.
+        -->
+<!-- Line to Left -->
+<path d="M 550 324 L 390 324" fill="none" stroke="url(#gradLeft)" stroke-dasharray="2 4" stroke-width="2"></path>
+<circle cx="390" cy="324" fill="#3b82f6" r="3"></circle>
+<!-- Line to Right -->
+<path d="M 730 324 L 890 324" fill="none" stroke="url(#gradRight)" stroke-dasharray="2 4" stroke-width="2"></path>
+<circle cx="890" cy="324" fill="#a855f7" r="3"></circle>
+<!-- Line to Bottom -->
+<path d="M 640 414 L 640 550" fill="none" stroke="url(#gradBottom)" stroke-dasharray="2 4" stroke-width="2"></path>
+<circle cx="640" cy="550" fill="#14b8a6" r="3"></circle>
+</svg>
+<div class="main-content">
+<!-- Header -->
+<div class="header-section">
+<div class="section-tag">
+<i class="fa-solid fa-microchip mr-2"></i> The Solution
+            </div>
+<h1 class="title-text">The Career Gym</h1>
+</div>
+<!-- Feature Triad -->
+<div class="features-container">
+<!-- Feature 1: Voice (Left) -->
+<div class="feature-card card-left">
+<div class="card-icon icon-voice">
+<i class="fa-solid fa-microphone-lines"></i>
+</div>
+<h3 class="card-title">Voice-First</h3>
+<p class="card-desc">
+                        Interacts, interrupts, and challenges candidates <span class="highlight-text">like a human</span>. No more silent typing; it's a conversation.
+                    </p>
+</div>
+<!-- Central Core -->
+<div class="core-visual">
+<div class="core-ring ring-1"></div>
+<div class="core-ring ring-2"></div>
+<div class="core-circle">
+<i class="fa-solid fa-brain core-icon"></i>
+</div>
+</div>
+<!-- Feature 2: Visual (Right) -->
+<div class="feature-card card-right">
+<div class="card-icon icon-visual">
+<i class="fa-regular fa-eye"></i>
+</div>
+<h3 class="card-title">Visual Intelligence</h3>
+<p class="card-desc">
+                        It sees what you draw. The AI critiques <span class="highlight-text">system design</span> whiteboard diagrams in real-time.
+                    </p>
+</div>
+<!-- Feature 3: Cheat-Proof (Bottom) -->
+<div class="feature-card card-bottom">
+<div class="card-icon icon-security">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<h3 class="card-title">Cheat-Proof</h3>
+<p class="card-desc">
+                        Analyzes the <span class="highlight-text">explanation</span>, not just the code. If you can't explain why your code works, you don't pass.
+                    </p>
+</div>
+</div>
+</div>
+<div class="footer-status">
+            HireFlow AI // Multimodal Simulator
+        </div>
+</div>
+</body>
+</html>
